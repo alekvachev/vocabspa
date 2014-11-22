@@ -54,7 +54,7 @@
     } else {
         pageContext.setAttribute("user", user.getNickname());
 %>
-    <p>Hello, ${fn:escapeXml(user)}. <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Sign out</a></p>
+    <p>Hello, <span id="userNickname">${fn:escapeXml(user)}</span>. <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Sign out</a></p>
 <%
         //Determine if user has already registered
         Entity userEntity = UsersService.getUserEntity(user.getEmail());

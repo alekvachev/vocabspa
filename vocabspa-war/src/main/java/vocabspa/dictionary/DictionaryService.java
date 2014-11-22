@@ -26,6 +26,7 @@ public class DictionaryService {
         dictionaryEntity.setProperty("wordCount", 0);
         dictionaryEntity.setProperty("currentStreak", 0);
         dictionaryEntity.setProperty("longestStreak", 0);
+        dictionaryEntity.setProperty("lastActivity", null);
         datastore.put(dictionaryEntity);
     }
 }

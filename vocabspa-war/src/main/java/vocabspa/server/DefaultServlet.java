@@ -14,12 +14,12 @@ import java.io.IOException;
 public class DefaultServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        for (Cookie cookie : req.getCookies()) {
+        /*for (Cookie cookie : req.getCookies()) {
             if (cookie.getName().equals("timezoneoffset")) {
                 req.setAttribute(cookie.getName(), cookie.getValue());
                 break;
             }
-        }
+        }*/
         req.getRequestDispatcher("/welcome.jsp").forward(req, resp);
     }
 

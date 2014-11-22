@@ -43,11 +43,26 @@ var App = (function (App, $) {
         entry.frn = $('form input[name=frn]').val();
         entry.prn = $('form input[name=prn]').val();
         entry.ntv = $('form input[name=ntv]').val();
+        entry.dictionary = $('#dictionaryName').text();
+        entry.userEmail = $('#userNickname').text();
 
         var json = JSON.stringify(entry);
-        var url = baseUrl + "res/add";
-        $.post(url, json).done(function(data) {
-            $('#saveActionOutcome').html(data);
+        var url = baseUrl + "res/entry/save";
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: json,
+            contentType: 'application/json'
+        }).done(function(data) {
+            $('#saveActionOutcome').text(JSON.stringify(data));
+            console.log(data);
+        });
+    };
+
+    App.getJSON = function() {
+        var url = baseUrl + "res/entry/get";
+        $.get(url).done(function(data) {
+            $('#saveActionOutcome').text(data.msg);
         });
     };
 

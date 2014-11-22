@@ -19,7 +19,8 @@ public class Entry {
     private String synonymGroupStr;
     private Key entryGroup;
     private Key synonymGroup;
-    private static final String NEWLINE = "\n";
+    private String dictionary;
+    private String userEmail;
 
     public String getFrn() {
         return frn;
@@ -99,6 +100,22 @@ public class Entry {
 
     public void setSynonymGroup(Key synonymGroup) {
         this.synonymGroup = synonymGroup;
+    }
+
+    public String getDictionary() {
+        return dictionary;
+    }
+
+    public void setDictionary(String dictionary) {
+        this.dictionary = dictionary;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String user) {
+        this.userEmail = user + "@gmail.com";
     }
 
     @Override

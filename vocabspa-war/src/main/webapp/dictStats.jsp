@@ -14,7 +14,7 @@
 <%
     } else {
 %>
-    <div>Current dictionary: <%=request.getParameter("name")%></div>
+    <div>Current dictionary: <span id="dictionaryName"><%=request.getParameter("name")%></span></div>
     <div>Word Count: <%=request.getParameter("wordCount")%></div>
     <div>You are on a <%=request.getParameter("currentStreak")%> day streak</div>
 <%
