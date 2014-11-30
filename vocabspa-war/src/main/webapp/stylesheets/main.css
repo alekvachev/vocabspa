@@ -1,0 +1,15 @@
+.txtInput {
+    display: block;
+    float: left;
+    width: 200px;
+}
+
+.txtInput span {
+    display: none;
+    color: red;
+}
+
+.btnActions {
+    display: block;
+    margin: 5px;
+}

@@ -2,7 +2,9 @@ package vocabspa.entry;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.gson.Gson;
+import org.apache.commons.lang3.time.DateUtils;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -21,6 +23,8 @@ public class Entry {
     private Key synonymGroup;
     private String dictionary;
     private String userEmail;
+    private Date created;
+    private Date lastModified;
 
     public String getFrn() {
         return frn;
@@ -118,9 +122,33 @@ public class Entry {
         this.userEmail = user + "@gmail.com";
     }
 
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
+    }
+
     @Override
     public String toString() {
         Gson gson = new Gson();
         return gson.toJson(this);
+    }
+
+    public void populateNewEntry() {
+        this.created = new Date();
+        this.lastModified = this.created;
+        this.lastReview = DateUtils.truncate(this.created, Calendar.DATE);
+        this.correctCount = 0;
+        this.nextReview = DateUtils.addDays(this.lastReview, 2);
     }
 }

@@ -1,9 +1,22 @@
 <form name="addForm">
-    <input type="text" name="frn">
-    <input type="text" name="prn">
-    <input type="text" name="ntv">
-    <input type="button" value="Save" onclick="App.addEntry()">
-    <input type="button" value="Back to dictionaries" onclick="App.displayDicts()">
-    <input type="button" value="Test Jackson" onclick="App.getJSON()">
-    <span id="saveActionOutcome"></span>
+    <div class="txtInput" id="frnInput">
+        <input type="text" name="frn">
+        <span>Foreign entry is empty</span>
+    </div>
+
+    <div class="txtInput" id="prnInput">
+        <input type="text" name="prn">
+    </div>
+
+    <div class="txtInput" id="ntvInput">
+        <input type="text" name="ntv">
+        <span>Native entry is empty</span>
+    </div>
+
+    <div class="btnActions" id="basicDicActions">
+        <input type="button" value="Save" onclick="App.addEntry()">
+        <input type="button" value="Back to dictionaries" onclick="App.displayDicts()">
+        <input type="button" value="Test Jackson" onclick="App.getJSON()">
+        <span id="saveActionOutcome"></span>
+    </div>
 </form>
