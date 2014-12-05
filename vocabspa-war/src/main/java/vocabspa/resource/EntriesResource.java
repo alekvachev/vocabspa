@@ -35,6 +35,13 @@ public class EntriesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveEntry(Entry entry) {
-        return Response.status(201).entity(entry).build();
+        //EntryService entryService = new EntryService();
+        try {
+            return Response.status(201).entity(entryService.save(entry)).build();
+        } catch (Exception e) {
+            logger.info("This is legit", e);
+            return Response.status(500).build();
+        }
+
     }
 }
