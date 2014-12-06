@@ -38,6 +38,16 @@ var App = (function (App, $) {
         $('.takeAction').html('<input type="button" value="Build up my vocabulary" onclick="App.displayAdd()">');
     };
 
+    App.displayAddOns = function() {
+        $('form[name=basicsForm] :input').prop('disabled', true);
+        $('#addOns').css('display', 'block');
+    };
+
+    App.hideAddOns = function() {
+        $('form[name=basicsForm] :input').prop('disabled', false);
+        $('#addOns').css('display', 'none');
+    };
+
     App.addEntry = function() {
         $('.txtInput span').css('display', 'none');
         if ($('form input[name=frn]').val() == "") {
@@ -51,6 +61,7 @@ var App = (function (App, $) {
             entry.ntv = $('form input[name=ntv]').val();
             entry.dictionary = $('#dictionaryName').text();
             entry.userEmail = $('#userNickname').text();
+            entry.timezoneOffset = $('#timezoneOffset').text();
 
             var json = JSON.stringify(entry);
             var url = baseUrl + "res/entry/save";
@@ -66,7 +77,7 @@ var App = (function (App, $) {
         }
     };
 
-    App.getJSON = function() {
+    App.lookUp = function() {
         var url = baseUrl + "res/entry/get";
         $.get(url).done(function(data) {
             $('#saveActionOutcome').text(data.msg);

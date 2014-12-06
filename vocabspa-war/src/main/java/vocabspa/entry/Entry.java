@@ -4,6 +4,8 @@ import com.google.appengine.api.datastore.Key;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.time.DateUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -14,15 +16,14 @@ public class Entry {
     private String frn;
     private String prn;
     private String ntv;
-    private Date lastReview;
+    private String lastReview;
     private int correctCount;
-    private Date nextReview;
-    private String entryGroupStr;
-    private String synonymGroupStr;
+    private String nextReview;
     private Key entryGroup;
     private Key synonymGroup;
     private String dictionary;
     private String userEmail;
+    private int timezoneOffset;
     private Date created;
     private Date lastModified;
 
@@ -50,11 +51,11 @@ public class Entry {
         this.ntv = ntv;
     }
 
-    public Date getLastReview() {
+    public String getLastReview() {
         return lastReview;
     }
 
-    public void setLastReview(Date lastReview) {
+    public void setLastReview(String lastReview) {
         this.lastReview = lastReview;
     }
 
@@ -66,28 +67,12 @@ public class Entry {
         this.correctCount = correctCount;
     }
 
-    public Date getNextReview() {
+    public String getNextReview() {
         return nextReview;
     }
 
-    public void setNextReview(Date nextReview) {
+    public void setNextReview(String nextReview) {
         this.nextReview = nextReview;
-    }
-
-    public String getEntryGroupStr() {
-        return entryGroupStr;
-    }
-
-    public void setEntryGroupStr(String entryGroupStr) {
-        this.entryGroupStr = entryGroupStr;
-    }
-
-    public String getSynonymGroupStr() {
-        return synonymGroupStr;
-    }
-
-    public void setSynonymGroupStr(String synonymGroupStr) {
-        this.synonymGroupStr = synonymGroupStr;
     }
 
     public Key getEntryGroup() {
@@ -122,6 +107,14 @@ public class Entry {
         this.userEmail = user + "@gmail.com";
     }
 
+    public int getTimezoneOffset() {
+        return timezoneOffset;
+    }
+
+    public void setTimezoneOffset(int timezoneOffset) {
+        this.timezoneOffset = timezoneOffset;
+    }
+
     public Date getCreated() {
         return created;
     }
@@ -147,8 +140,10 @@ public class Entry {
     public void populateNewEntry() {
         this.created = new Date();
         this.lastModified = this.created;
-        this.lastReview = DateUtils.truncate(this.created, Calendar.DATE);
         this.correctCount = 0;
-        this.nextReview = DateUtils.addDays(this.lastReview, 2);
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yy");
+        Date lastReviewAux = DateUtils.truncate(DateUtils.addMinutes(this.created, -timezoneOffset), Calendar.DATE);
+        this.lastReview = sdf.format(lastReviewAux);
+        this.nextReview = sdf.format(DateUtils.addDays(lastReviewAux, 2));
     }
 }

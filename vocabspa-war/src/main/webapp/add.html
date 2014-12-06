@@ -1,22 +1,47 @@
-<form name="addForm">
-    <div class="txtInput" id="frnInput">
-        <input type="text" name="frn">
-        <span>Foreign entry is empty</span>
-    </div>
+<div id="basics">
+    <form name="basicsForm">
+        <div class="txtInput" id="frnInput">
+            <input type="text" name="frn">
+            <span>Foreign entry is empty</span>
+        </div>
 
-    <div class="txtInput" id="prnInput">
-        <input type="text" name="prn">
-    </div>
+        <div class="txtInput" id="prnInput">
+            <input type="text" name="prn">
+        </div>
 
-    <div class="txtInput" id="ntvInput">
-        <input type="text" name="ntv">
-        <span>Native entry is empty</span>
-    </div>
+        <div class="txtInput" id="ntvInput">
+            <input type="text" name="ntv">
+            <span>Native entry is empty</span>
+        </div>
 
-    <div class="btnActions" id="basicDicActions">
-        <input type="button" value="Save" onclick="App.addEntry()">
-        <input type="button" value="Back to dictionaries" onclick="App.displayDicts()">
-        <input type="button" value="Test Jackson" onclick="App.getJSON()">
-        <span id="saveActionOutcome"></span>
-    </div>
-</form>
+        <div class="btnActions" id="basicDicActions">
+            <input type="button" value="Add On" onclick="App.displayAddOns()">
+            <input type="button" value="Save" onclick="App.addEntry()">
+            <input type="button" value="Back to dictionaries" onclick="App.displayDicts()">
+            <span id="saveActionOutcome"></span>
+        </div>
+    </form>
+</div>
+
+<div id="addOns" style="display: none">
+    <span>Add Ons</span>
+    <form name="addOnsForm">
+        <div class="txtInput" id="frnLookupInput">
+            <input type="text" name="frnL">
+        </div>
+
+        <div class="txtInput" id="prnLookupInput">
+            <input type="text" name="prnL">
+        </div>
+
+        <div class="txtInput" id="ntvLookupInput">
+            <input type="text" name="ntvL">
+        </div>
+
+        <div class="btnActions" id="lookupActions">
+            <input type="button" value="Look Up" onclick="App.lookUp()">
+            <input type="button" value="Hide Add Ons" onclick="App.hideAddOns()">
+            <span id="lookupActionOutcome"></span>
+        </div>
+    </form>
+</div>

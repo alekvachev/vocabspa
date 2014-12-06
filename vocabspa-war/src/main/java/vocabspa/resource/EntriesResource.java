@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("/entry")
 public class EntriesResource {
-    @Inject
+    //app engine does not support injection
     EntryService entryService;
 
     Log logger = LogFactory.getLog(getClass());
@@ -35,13 +35,12 @@ public class EntriesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveEntry(Entry entry) {
-        //EntryService entryService = new EntryService();
+        EntryService entryService = new EntryService();
         try {
             return Response.status(201).entity(entryService.save(entry)).build();
         } catch (Exception e) {
             logger.info("This is legit", e);
             return Response.status(500).build();
         }
-
     }
 }

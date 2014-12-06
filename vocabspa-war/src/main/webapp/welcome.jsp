@@ -55,6 +55,7 @@
         pageContext.setAttribute("user", user.getNickname());
 %>
     <p>Hello, <span id="userNickname">${fn:escapeXml(user)}</span>. <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">Sign out</a></p>
+    <span id="timezoneOffset" style="display: none"><%= offset %></span>
 <%
         //Determine if user has already registered
         Entity userEntity = UsersService.getUserEntity(user.getEmail());
