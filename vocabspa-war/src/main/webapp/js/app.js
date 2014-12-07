@@ -41,11 +41,19 @@ var App = (function (App, $) {
     App.displayAddOns = function() {
         $('form[name=basicsForm] :input').prop('disabled', true);
         $('#addOns').css('display', 'block');
+        $('input[name=frnL]').prop('disabled', false);
+        $('input[name=frnL]').focus();
+        $('input[name=prnL], input[name=ntvL]').prop('disabled', true);
     };
 
     App.hideAddOns = function() {
         $('form[name=basicsForm] :input').prop('disabled', false);
         $('#addOns').css('display', 'none');
+    };
+
+    App.toggleTextInputs = function(inputContainer) {
+        $('form[name=addOnsForm] input[type=text]').prop('disabled', true);
+        $(inputContainer).children().first().prop('disabled', false).focus();
     };
 
     App.addEntry = function() {
