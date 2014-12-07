@@ -4,13 +4,27 @@ package vocabspa.entry;
  * Created by Alek on 6/30/2014.
  */
 public class DummyEntry {
-    String msg;
+    String field;
+    String lookUpString;
 
-    public String getMsg() {
-        return msg;
+    public DummyEntry(String field, String lookUpString) {
+        this.field = field;
+        this.lookUpString = lookUpString;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public String getLookUpString() {
+        return lookUpString;
+    }
+
+    public void setLookUpString(String lookUpString) {
+        this.lookUpString = lookUpString;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
     }
 }

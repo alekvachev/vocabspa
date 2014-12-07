@@ -86,7 +86,10 @@ var App = (function (App, $) {
     };
 
     App.lookUp = function() {
-        var url = baseUrl + "res/entry/get";
+        var lookUpInput = $('form[name=addOnsForm] input[type=text]:enabled');
+        var field = lookUpInput.attr('name').substring(0, 3);
+        var lookUpString = lookUpInput.val();
+        var url = baseUrl + "res/entry/lookup?field=" + field + "&string=" + lookUpString;
         $.get(url).done(function(data) {
             $('#saveActionOutcome').text(data.msg);
         });

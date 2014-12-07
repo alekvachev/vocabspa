@@ -21,26 +21,24 @@ public class EntriesResource {
 
     Log logger = LogFactory.getLog(getClass());
 
-    @GET
-    @Path("/get")
-    @Produces(MediaType.APPLICATION_JSON)
-    public DummyEntry getEntry() {
-        DummyEntry dm = new DummyEntry();
-        dm.setMsg("message");
-        return dm;
-    }
-
     @POST
     @Path("/save")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response saveEntry(Entry entry) {
-        EntryService entryService = new EntryService();
+        entryService = new EntryService();
         try {
             return Response.status(201).entity(entryService.save(entry)).build();
         } catch (Exception e) {
             logger.info("This is legit", e);
             return Response.status(500).build();
         }
+    }
+
+    @GET
+    @Path("/lookup")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response lookUpEntries(@QueryParam("field") String field, @QueryParam("string") String string) {
+        return Response.ok().entity(new DummyEntry(field, string)).build();
     }
 }
