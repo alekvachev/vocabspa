@@ -32,6 +32,8 @@ var App = (function (App, $) {
         $.ajax(url).done(function(data) {
             $('.takeAction').html(data);
         });
+        window.user = $('#userNickname').text();
+        window.dict = $('#dictionaryName').text();
     };
 
     App.displayDicts = function() {
@@ -41,6 +43,7 @@ var App = (function (App, $) {
     App.displayAddOns = function() {
         $('form[name=basicsForm] :input').prop('disabled', true);
         $('#addOns').css('display', 'block');
+        $('form[name=addOnsForm] input[type=text]').val("");
         $('input[name=frnL]').prop('disabled', false);
         $('input[name=frnL]').focus();
         $('input[name=prnL], input[name=ntvL]').prop('disabled', true);
@@ -67,8 +70,8 @@ var App = (function (App, $) {
             entry.frn = $('form input[name=frn]').val();
             entry.prn = $('form input[name=prn]').val();
             entry.ntv = $('form input[name=ntv]').val();
-            entry.dictionary = $('#dictionaryName').text();
-            entry.userEmail = $('#userNickname').text();
+            entry.dictionary = window.dict;
+            entry.userEmail = window.user;
             entry.timezoneOffset = $('#timezoneOffset').text();
 
             var json = JSON.stringify(entry);
@@ -89,9 +92,9 @@ var App = (function (App, $) {
         var lookUpInput = $('form[name=addOnsForm] input[type=text]:enabled');
         var field = lookUpInput.attr('name').substring(0, 3);
         var lookUpString = lookUpInput.val();
-        var url = baseUrl + "res/entry/lookup?field=" + field + "&string=" + lookUpString;
+        var url = baseUrl + "res/entry/lookup?user=" + window.user + "&dict=" + window.dict + "&field=" + field + "&string=" + lookUpString;
         $.get(url).done(function(data) {
-            $('#saveActionOutcome').text(data.msg);
+            $('#lookupActionOutcome').text(JSON.stringify(data));
         });
     };
 

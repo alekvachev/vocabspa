@@ -2,11 +2,10 @@ package vocabspa.resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import vocabspa.entry.DummyEntry;
 import vocabspa.entry.Entry;
 import vocabspa.entry.EntryService;
+import vocabspa.exception.ExceptionsUtil;
 
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -30,7 +29,7 @@ public class EntriesResource {
         try {
             return Response.status(201).entity(entryService.save(entry)).build();
         } catch (Exception e) {
-            logger.info("This is legit", e);
+            ExceptionsUtil.handleGenericException(e, logger);
             return Response.status(500).build();
         }
     }
@@ -38,7 +37,14 @@ public class EntriesResource {
     @GET
     @Path("/lookup")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response lookUpEntries(@QueryParam("field") String field, @QueryParam("string") String string) {
-        return Response.ok().entity(new DummyEntry(field, string)).build();
+    public Response lookUpEntries(@QueryParam("user") String user, @QueryParam("dict") String dict,
+                                  @QueryParam("field") String field, @QueryParam("string") String string) {
+        entryService = new EntryService();
+        try {
+            return Response.ok().entity(entryService.lookup(user, dict, field, string)).build();
+        } catch (Exception e) {
+            ExceptionsUtil.handleGenericException(e, logger);
+            return Response.status(500).build();
+        }
     }
 }

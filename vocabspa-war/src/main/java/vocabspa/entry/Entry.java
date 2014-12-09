@@ -1,5 +1,6 @@
 package vocabspa.entry;
 
+import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.time.DateUtils;
@@ -17,7 +18,7 @@ public class Entry {
     private String prn;
     private String ntv;
     private String lastReview;
-    private int correctCount;
+    private long correctCount;
     private String nextReview;
     private Key entryGroup;
     private Key synonymGroup;
@@ -26,6 +27,22 @@ public class Entry {
     private int timezoneOffset;
     private Date created;
     private Date lastModified;
+
+    public Entry(Entity entity) {
+        frn = (String) entity.getProperty("frn");
+        prn = (String) entity.getProperty("prn");
+        ntv = (String) entity.getProperty("ntv");
+        lastReview = (String) entity.getProperty("lastReview");
+        correctCount = (Long) entity.getProperty("correctCount");
+        nextReview = (String) entity.getProperty("nextReview");
+        entryGroup = (Key) entity.getProperty("entryGroup");
+        synonymGroup = (Key) entity.getProperty("synonymGroup");
+        dictionary = entity.getParent().getName();
+        userEmail = entity.getParent().getParent().getName();
+        timezoneOffset = -1;
+        created = (Date) entity.getProperty("created");
+        lastModified = (Date) entity.getProperty("lastModified");
+    }
 
     public String getFrn() {
         return frn;
@@ -59,11 +76,11 @@ public class Entry {
         this.lastReview = lastReview;
     }
 
-    public int getCorrectCount() {
+    public long getCorrectCount() {
         return correctCount;
     }
 
-    public void setCorrectCount(int correctCount) {
+    public void setCorrectCount(long correctCount) {
         this.correctCount = correctCount;
     }
 

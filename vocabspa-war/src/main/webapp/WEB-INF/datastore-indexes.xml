@@ -3,4 +3,16 @@
     <datastore-index kind="dictionary" ancestor="true" source="manual">
         <property name="dateCreated" direction="asc"/>
     </datastore-index>
+
+    <datastore-index kind="entry" ancestor="true" source="manual">
+        <property name="frn" direction="asc"/>
+    </datastore-index>
+
+    <datastore-index kind="entry" ancestor="true" source="manual">
+        <property name="prn" direction="asc"/>
+    </datastore-index>
+
+    <datastore-index kind="entry" ancestor="true" source="manual">
+        <property name="ntv" direction="asc"/>
+    </datastore-index>
 </datastore-indexes>
