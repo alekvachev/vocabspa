@@ -15,14 +15,19 @@
 
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="stylesheets/main.css"/>
-
     <script type = "text/javascript" src = "js/libraries/jquery-2.1.1.js"></script>
     <script type = "text/javascript" src = "js/libraries/jquery.cookie.js"></script>
-    <script type = "text/javascript" src = "js/app.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="DataTables-1.10.4/media/css/jquery.dataTables.css"/>
+    <link type="text/css" rel="stylesheet" href="DataTables-1.10.4/media/css/jquery.dataTables_themeroller.css"/>
+    <script type = "text/javascript" src = "DataTables-1.10.4/media/js/jquery.dataTables.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="stylesheets/animate.css"/>
+    <link type="text/css" rel="stylesheet" href="stylesheets/main.css"/>
+    <script type = "text/javascript" src = "js/vocapp.js"></script>
     <script type = "text/javascript">
         $(window).load(function () {
-            App.init();
+            Vocapp.init();
         });
     </script>
 </head>
@@ -131,7 +136,7 @@
         <jsp:param name="longestStreak" value='<%=dictionary != null ? dictionary.getProperty("longestStreak") : ""%>'/>
     </jsp:include>
     <div class="takeAction">
-        <input type="button" value="Build up my vocabulary" onclick="App.displayAdd()">
+        <input type="button" value="Build up my vocabulary" onclick="Vocapp.displayAdd()">
     </div>
 <%
                     //user has not selected a dictionary yet

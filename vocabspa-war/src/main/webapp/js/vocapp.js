@@ -1,14 +1,20 @@
-var App = (function (App, $) {
+var Vocapp = (function (Vocapp, $) {
 
     /**
-     * App.init()
+     * Vocapp.init()
      */
-    App.init = function () {
-        App.setTimeZoneCookie();
+    Vocapp.init = function () {
+        Vocapp.setTimeZoneCookie();
         window.baseUrl = "http://vocabspa.appspot.com/";
+        $.extend( $.fn.dataTable.defaults, {
+            ordering: false,
+            dom: 't',
+            scrollY: 400,
+            scrollCollapse: true
+        } );
     };
 
-    App.setTimeZoneCookie = function () {
+    Vocapp.setTimeZoneCookie = function () {
         var timeZoneCookie = "timezoneoffset";
 
         //if time zone cookie does not exist create one and reload page
@@ -27,7 +33,7 @@ var App = (function (App, $) {
         }
     };
 
-    App.displayAdd = function() {
+    Vocapp.displayAdd = function() {
         var url = baseUrl + "add.html";
         $.ajax(url).done(function(data) {
             $('.takeAction').html(data);
@@ -36,30 +42,32 @@ var App = (function (App, $) {
         window.dict = $('#dictionaryName').text();
     };
 
-    App.displayDicts = function() {
-        $('.takeAction').html('<input type="button" value="Build up my vocabulary" onclick="App.displayAdd()">');
+    Vocapp.displayDicts = function() {
+        $('.takeAction').html('<input type="button" value="Build up my vocabulary" onclick="Vocapp.displayAdd()">');
     };
 
-    App.displayAddOns = function() {
+    Vocapp.displayAddOns = function() {
         $('form[name=basicsForm] :input').prop('disabled', true);
         $('#addOns').css('display', 'block');
         $('form[name=addOnsForm] input[type=text]').val("");
         $('input[name=frnL]').prop('disabled', false);
         $('input[name=frnL]').focus();
         $('input[name=prnL], input[name=ntvL]').prop('disabled', true);
+        $('#lookupActionOutcome').html('');
     };
 
-    App.hideAddOns = function() {
+
+    Vocapp.hideAddOns = function() {
         $('form[name=basicsForm] :input').prop('disabled', false);
         $('#addOns').css('display', 'none');
     };
 
-    App.toggleTextInputs = function(inputContainer) {
+    Vocapp.toggleTextInputs = function(inputContainer) {
         $('form[name=addOnsForm] input[type=text]').prop('disabled', true);
         $(inputContainer).children().first().prop('disabled', false).focus();
     };
 
-    App.addEntry = function() {
+    Vocapp.addEntry = function() {
         $('.txtInput span').css('display', 'none');
         if ($('form input[name=frn]').val() == "") {
             $('#frnInput span').css('display', 'inline');
@@ -88,15 +96,55 @@ var App = (function (App, $) {
         }
     };
 
-    App.lookUp = function() {
+    Vocapp.lookUp = function() {
         var lookUpInput = $('form[name=addOnsForm] input[type=text]:enabled');
         var field = lookUpInput.attr('name').substring(0, 3);
         var lookUpString = lookUpInput.val();
         var url = baseUrl + "res/entry/lookup?user=" + window.user + "&dict=" + window.dict + "&field=" + field + "&string=" + lookUpString;
+
+        $('#lookupActionOutcome').html('<table cellpadding="0" cellspacing="0" border="0" class="display" id="lookupDataTable"></table>')
         $.get(url).done(function(data) {
-            $('#lookupActionOutcome').text(JSON.stringify(data));
+            window.oAuxTable = $('#lookupDataTable').DataTable( {
+                data: data,
+                columns: [
+                    {
+                        data: 'frn',
+                        name: 'frn',
+                        title: 'Foreign'
+                    },
+                    {
+                        data: 'prn',
+                        name: 'prn',
+                        title: 'Pronunciation'
+                    },
+                    {
+                        data: 'ntv',
+                        name: 'ntv',
+                        title: 'Native'
+                    }
+                ],
+                initComplete: function(settings, json) {
+                    $('#lookupDataTable tbody').on('click', 'tr', function() {
+                        $(this).toggleClass('selected');
+                    });
+                }
+            } );
         });
     };
 
-    return App;
-}(App || {}, jQuery));
+    Vocapp.handleSelectRow = function() {
+        var id = this.id;
+        var index = $.inArray(id, selected);
+
+        if ( index === -1 ) {
+            selected.push( id );
+        } else {
+            selected.splice( index, 1 );
+        }
+
+        $(this).toggleClass('selected');
+        console.log(selected);
+    };
+
+    return Vocapp;
+}(Vocapp || {}, jQuery));

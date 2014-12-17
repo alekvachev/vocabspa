@@ -15,9 +15,9 @@
         </div>
 
         <div class="btnActions" id="basicDicActions">
-            <input type="button" value="Add On" onclick="App.displayAddOns()">
-            <input type="button" value="Save" onclick="App.addEntry()">
-            <input type="button" value="Back to dictionaries" onclick="App.displayDicts()">
+            <input type="button" value="Add On" onclick="Vocapp.displayAddOns()">
+            <input type="button" value="Save" onclick="Vocapp.addEntry()">
+            <input type="button" value="Back to dictionaries" onclick="Vocapp.displayDicts()">
             <span id="saveActionOutcome"></span>
         </div>
     </form>
@@ -26,22 +26,22 @@
 <div id="addOns" style="display: none">
     <span>Add Ons</span>
     <form name="addOnsForm">
-        <div class="txtInput" id="frnLookupInput" ondblclick="App.toggleTextInputs(this)">
+        <div class="txtInput" id="frnLookupInput" ondblclick="Vocapp.toggleTextInputs(this)">
             <input type="text" name="frnL">
         </div>
 
-        <div class="txtInput" id="prnLookupInput" ondblclick="App.toggleTextInputs(this)">
+        <div class="txtInput" id="prnLookupInput" ondblclick="Vocapp.toggleTextInputs(this)">
             <input type="text" name="prnL">
         </div>
 
-        <div class="txtInput" id="ntvLookupInput" ondblclick="App.toggleTextInputs(this)">
+        <div class="txtInput" id="ntvLookupInput" ondblclick="Vocapp.toggleTextInputs(this)">
             <input type="text" name="ntvL">
         </div>
 
         <div class="btnActions" id="lookupActions">
-            <input type="button" value="Look Up" onclick="App.lookUp()">
-            <input type="button" value="Hide Add Ons" onclick="App.hideAddOns()">
-            <span id="lookupActionOutcome"></span>
+            <input type="button" value="Look Up" onclick="Vocapp.lookUp()">
+            <input type="button" value="Hide Add Ons" onclick="Vocapp.hideAddOns()">
+            <div id="lookupActionOutcome"></div>
         </div>
     </form>
 </div>
