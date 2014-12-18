@@ -50,8 +50,7 @@ var Vocapp = (function (Vocapp, $) {
         $('form[name=basicsForm] :input').prop('disabled', true);
         $('#addOns').css('display', 'block');
         $('form[name=addOnsForm] input[type=text]').val("");
-        $('input[name=frnL]').prop('disabled', false);
-        $('input[name=frnL]').focus();
+        $('input[name=frnL]').prop('disabled', false).focus();
         $('input[name=prnL], input[name=ntvL]').prop('disabled', true);
         $('#lookupActionOutcome').html('');
     };
@@ -100,36 +99,39 @@ var Vocapp = (function (Vocapp, $) {
         var lookUpInput = $('form[name=addOnsForm] input[type=text]:enabled');
         var field = lookUpInput.attr('name').substring(0, 3);
         var lookUpString = lookUpInput.val();
-        var url = baseUrl + "res/entry/lookup?user=" + window.user + "&dict=" + window.dict + "&field=" + field + "&string=" + lookUpString;
-
-        $('#lookupActionOutcome').html('<table cellpadding="0" cellspacing="0" border="0" class="display" id="lookupDataTable"></table>')
-        $.get(url).done(function(data) {
-            window.oAuxTable = $('#lookupDataTable').DataTable( {
-                data: data,
-                columns: [
-                    {
-                        data: 'frn',
-                        name: 'frn',
-                        title: 'Foreign'
-                    },
-                    {
-                        data: 'prn',
-                        name: 'prn',
-                        title: 'Pronunciation'
-                    },
-                    {
-                        data: 'ntv',
-                        name: 'ntv',
-                        title: 'Native'
+        if (lookUpString == '') {
+            alert("What am I looking up?");
+        } else {
+            $('#lookupActionOutcome').html('<table cellpadding="0" cellspacing="0" border="0" class="display" id="lookupDataTable"></table>')
+            var url = baseUrl + "res/entry/lookup?user=" + window.user + "&dict=" + window.dict + "&field=" + field + "&string=" + lookUpString;
+            $.get(url).done(function(data) {
+                window.oAuxTable = $('#lookupDataTable').DataTable( {
+                    data: data,
+                    columns: [
+                        {
+                            data: 'frn',
+                            name: 'frn',
+                            title: 'Foreign'
+                        },
+                        {
+                            data: 'prn',
+                            name: 'prn',
+                            title: 'Pronunciation'
+                        },
+                        {
+                            data: 'ntv',
+                            name: 'ntv',
+                            title: 'Native'
+                        }
+                    ],
+                    initComplete: function(settings, json) {
+                        $('#lookupDataTable tbody').on('click', 'tr', function() {
+                            $(this).toggleClass('selected');
+                        });
                     }
-                ],
-                initComplete: function(settings, json) {
-                    $('#lookupDataTable tbody').on('click', 'tr', function() {
-                        $(this).toggleClass('selected');
-                    });
-                }
-            } );
-        });
+                } );
+            });
+        }
     };
 
     Vocapp.handleSelectRow = function() {
