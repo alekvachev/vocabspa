@@ -26,6 +26,22 @@
     padding: 6px;
 }
 
+.addonSyns {
+    float: left;
+    border: 2px solid #B9EABC;
+    background-color: #F2FFF3;
+    color: #0BA114;
+    border-radius: 6px;
+    padding: 3px;
+    margin: 3px;
+    cursor: hand;
+}
+
+.selectedSyn {
+    background-color: #97FFD2;
+    border: 2px solid #4A5F4D;
+}
+
 body, td {
     -webkit-touch-callout: none;
     -webkit-user-select: none;

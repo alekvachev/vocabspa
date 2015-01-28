@@ -133,11 +133,16 @@ var Vocapp = (function (Vocapp, $) {
                             if(e.keyCode == 83 && e.ctrlKey) {
                                 e.preventDefault();
                                 var selectedEntities = $('#lookupDataTable').find('tr.selected');
-                                console.log(selectedEntities);
                                 var synonymDiv;
                                 for(var i = 0; i < selectedEntities.length; i++) {
+                                    //create div element and populate its text
                                     synonymDiv = $('<div class="addonSyns"></div>').html(selectedEntities[i].children[0].innerHTML);
+                                    //make div selectable
+                                    synonymDiv.on('click', function() {
+                                        $(this).toggleClass('selectedSyn');
+                                    });
                                     $('#addonSynonyms').append(synonymDiv);
+                                    $(selectedEntities[i]).toggleClass('selected');
                                 }
                             }
                         });
