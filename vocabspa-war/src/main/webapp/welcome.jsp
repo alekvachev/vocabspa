@@ -22,6 +22,8 @@
     <link type="text/css" rel="stylesheet" href="DataTables-1.10.4/media/css/jquery.dataTables_themeroller.css"/>
     <script type = "text/javascript" src = "DataTables-1.10.4/media/js/jquery.dataTables.js"></script>
 
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+
     <link type="text/css" rel="stylesheet" href="css/animate.css"/>
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
     <script type = "text/javascript" src = "js/vocapp.js"></script>

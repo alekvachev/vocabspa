@@ -128,6 +128,19 @@ var Vocapp = (function (Vocapp, $) {
                         $('#lookupDataTable tbody').on('click', 'tr', function() {
                             $(this).toggleClass('selected');
                         });
+                        //Enable Ctrl+S event
+                        $(document).keydown(function(e) {
+                            if(e.keyCode == 83 && e.ctrlKey) {
+                                e.preventDefault();
+                                var selectedEntities = $('#lookupDataTable').find('tr.selected');
+                                console.log(selectedEntities);
+                                var synonymDiv;
+                                for(var i = 0; i < selectedEntities.length; i++) {
+                                    synonymDiv = $('<div class="addonSyns"></div>').html(selectedEntities[i].children[0].innerHTML);
+                                    $('#addonSynonyms').append(synonymDiv);
+                                }
+                            }
+                        });
                     }
                 } );
             });
