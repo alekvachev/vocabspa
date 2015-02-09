@@ -17,7 +17,7 @@
         <div class="btnActions" id="basicDicActions">
             <input type="button" value="Add On" onclick="Vocapp.displayAddOns()">
             <input type="button" value="Save" onclick="Vocapp.addEntry()">
-            <input type="button" value="Back to dictionaries" onclick="Vocapp.displayDicts()">
+            <input type="button" value="Dictionary Home" onclick="Vocapp.displayDictHome()">
             <span id="saveActionOutcome"></span>
         </div>
     </form>
@@ -39,10 +39,15 @@
         </div>
 
         <div class="btnActions" id="lookupActions">
-            <input type="button" value="Look Up" onclick="Vocapp.lookUp()">
-            <input type="button" value="Hide Add Ons" onclick="Vocapp.hideAddOns()">
+            <input type="button" value="Look Up By Field" onclick="Vocapp.lookUp()">
+            <input type="button" value="Discard" onclick="Vocapp.hideAddOns()">
         </div>
-        <div class="addonLinks" id="addonSynonyms"></div>
+        <div class="addonLinks" id="addonSynonyms">
+            <div class="addonLinksContainer" id="addonSynonymsContainer"></div>
+            <div class="addonOperations" id="addonSynonymsOperation">
+                <span></span>
+            </div>
+        </div>
         <div class="addonLinks" id="addonGroups"></div>
         <div id="lookupActionOutcome"></div>
     </form>

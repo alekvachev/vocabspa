@@ -42,7 +42,7 @@ var Vocapp = (function (Vocapp, $) {
         window.dict = $('#dictionaryName').text();
     };
 
-    Vocapp.displayDicts = function() {
+    Vocapp.displayDictHome = function() {
         $('.takeAction').html('<input type="button" value="Build up my vocabulary" onclick="Vocapp.displayAdd()">');
     };
 
@@ -53,6 +53,9 @@ var Vocapp = (function (Vocapp, $) {
         $('input[name=frnL]').prop('disabled', false).focus();
         $('input[name=prnL], input[name=ntvL]').prop('disabled', true);
         $('#lookupActionOutcome').html('');
+        $('.addonLinks').html('');
+        window.addonSynonyms = [];
+        window.addonGroups = [];
     };
 
 
@@ -82,6 +85,7 @@ var Vocapp = (function (Vocapp, $) {
             entry.timezoneOffset = $('#timezoneOffset').text();
 
             var json = JSON.stringify(entry);
+            console.log(json);
             var url = baseUrl + "res/entry/save";
             $.ajax({
                 url: url,
@@ -141,7 +145,7 @@ var Vocapp = (function (Vocapp, $) {
                                     synonymDiv.on('click', function() {
                                         $(this).toggleClass('selectedSyn');
                                     });
-                                    $('#addonSynonyms').append(synonymDiv);
+                                    $('#addonSynonymsContainer').append(synonymDiv);
                                     $(selectedEntities[i]).toggleClass('selected');
                                 }
                             }

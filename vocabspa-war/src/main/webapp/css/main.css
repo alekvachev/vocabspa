@@ -42,6 +42,11 @@
     border: 2px solid #4A5F4D;
 }
 
+.addonOperations {
+    background: url('../images/icons/add155.png') no-repeat fixed center;
+    min-height: 64px;
+}
+
 body, td {
     -webkit-touch-callout: none;
     -webkit-user-select: none;

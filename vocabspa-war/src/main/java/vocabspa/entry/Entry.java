@@ -28,6 +28,9 @@ public class Entry {
     private Date created;
     private Date lastModified;
 
+    public Entry() {
+    }
+
     public Entry(Entity entity) {
         frn = (String) entity.getProperty("frn");
         prn = (String) entity.getProperty("prn");
